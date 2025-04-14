@@ -28,6 +28,8 @@ const sequelize = new Sequelize(
 const User = require('./user')(sequelize);
 const App = require('./app')(sequelize);
 const ApiKey = require('./apiKey')(sequelize);
+const Event = require('./event')(sequelize);
+
 
 // Define associations
 User.hasMany(App, { foreignKey: 'userId' });
@@ -36,13 +38,17 @@ App.belongsTo(User, { foreignKey: 'userId' });
 App.hasMany(ApiKey, { foreignKey: 'appId' });
 ApiKey.belongsTo(App, { foreignKey: 'appId' });
 
+App.hasMany(Event);
+Event.belongsTo(App);
+
 // Export the db object
 const db = {
   sequelize,
   Sequelize,
   User,
   App,
-  ApiKey
+  ApiKey,
+  Event
 };
 
 module.exports = db;

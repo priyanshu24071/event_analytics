@@ -3,7 +3,6 @@ const { Op } = Sequelize;
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
-//const logger = require('../../utils/logger');
 
 // Register a new app and generate API key
 const register = async (req, res, next) => {
