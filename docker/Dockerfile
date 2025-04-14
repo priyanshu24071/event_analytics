@@ -11,7 +11,7 @@ RUN npm ci --only=production
 COPY . .
 
 # Expose port
-EXPOSE 3000
+EXPOSE 3001
 
 # Start app
 CMD ["node", "src/app.js"] 

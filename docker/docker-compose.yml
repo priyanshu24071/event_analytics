@@ -6,13 +6,13 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on:
       - postgres
       - redis
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3001
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_NAME=analytics

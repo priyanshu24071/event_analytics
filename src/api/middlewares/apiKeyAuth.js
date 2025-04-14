@@ -1,4 +1,5 @@
-const { ApiKey, App } = require('../../db/models');
+const { ApiKey, App, Sequelize } = require('../../db/models');
+const { Op } = Sequelize;
 
 const validateApiKey = async (req, res, next) => {
   try {
@@ -17,7 +18,7 @@ const validateApiKey = async (req, res, next) => {
         key: apiKey,
         isActive: true,
         expiresAt: {
-          [db.Sequelize.Op.gt]: new Date()
+          [Op.gt]: new Date()
         }
       },
       include: [{ model: App }]

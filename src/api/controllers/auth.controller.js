@@ -1,4 +1,5 @@
-const { User, App, ApiKey } = require('../../db/models');
+const { User, App, ApiKey, sequelize, Sequelize } = require('../../db/models');
+const { Op } = Sequelize;
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/config');
@@ -15,12 +16,12 @@ const register = async (req, res, next) => {
       name,
       domain,
       type,
-      UserId: userId
+      userId: userId
     });
     
     // Generate API key
     const apiKey = await ApiKey.create({
-      AppId: app.id,
+      appId: app.id,
       expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) // 1 year expiration
     });
     
@@ -32,7 +33,7 @@ const register = async (req, res, next) => {
       }
     });
   } catch (error) {
-    logger.error('Error registering app:', error);
+    console.error('Error registering app:', error);
     next(error);
   }
 };
@@ -47,7 +48,7 @@ const getApiKey = async (req, res, next) => {
     const app = await App.findOne({
       where: {
         id: appId,
-        UserId: userId
+        userId: userId
       }
     });
     
@@ -61,10 +62,10 @@ const getApiKey = async (req, res, next) => {
     // Get active API key
     const apiKey = await ApiKey.findOne({
       where: {
-        AppId: appId,
+        appId: appId,
         isActive: true,
         expiresAt: {
-          [db.Sequelize.Op.gt]: new Date()
+          [Op.gt]: new Date()
         }
       }
     });
@@ -84,7 +85,7 @@ const getApiKey = async (req, res, next) => {
       }
     });
   } catch (error) {
-    logger.error('Error getting API key:', error);
+    console.error('Error getting API key:', error);
     next(error);
   }
 };
@@ -99,7 +100,7 @@ const revokeApiKey = async (req, res, next) => {
     const app = await App.findOne({
       where: {
         id: appId,
-        UserId: userId
+        userId: userId
       }
     });
     
@@ -115,7 +116,7 @@ const revokeApiKey = async (req, res, next) => {
       { isActive: false },
       {
         where: {
-          AppId: appId,
+          appId: appId,
           isActive: true
         }
       }
@@ -126,7 +127,7 @@ const revokeApiKey = async (req, res, next) => {
       message: 'API key(s) revoked successfully'
     });
   } catch (error) {
-    logger.error('Error revoking API key:', error);
+    console.error('Error revoking API key:', error);
     next(error);
   }
 };
@@ -141,7 +142,7 @@ const regenerateApiKey = async (req, res, next) => {
     const app = await App.findOne({
       where: {
         id: appId,
-        UserId: userId
+        userId: userId
       }
     });
     
@@ -157,7 +158,7 @@ const regenerateApiKey = async (req, res, next) => {
       { isActive: false },
       {
         where: {
-          AppId: appId,
+          appId: appId,
           isActive: true
         }
       }
@@ -165,7 +166,7 @@ const regenerateApiKey = async (req, res, next) => {
     
     // Generate new API key
     const apiKey = await ApiKey.create({
-      AppId: app.id,
+      appId: app.id,
       expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) // 1 year expiration
     });
     
@@ -177,7 +178,7 @@ const regenerateApiKey = async (req, res, next) => {
       }
     });
   } catch (error) {
-    logger.error('Error regenerating API key:', error);
+    console.error('Error regenerating API key:', error);
     next(error);
   }
 };

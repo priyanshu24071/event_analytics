@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
       unique: true,
       defaultValue: () => uuidv4().replace(/-/g, '')
     },
+    appId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true

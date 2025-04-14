@@ -1,15 +1,20 @@
 const { Sequelize } = require('sequelize');
 const config = require('../../config/config');
 
+// Determine the environment and get the corresponding configuration
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = config[env];
+
+// Initialize Sequelize with the correct configuration
 const sequelize = new Sequelize(
-  config.db.database,
-  config.db.username,
-  config.db.password,
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
   {
-    host: config.db.host,
-    port: config.db.port,
-    dialect: config.db.dialect,
-    logging: config.env === 'development' ? console.log : false,
+    host: dbConfig.host,
+    port: dbConfig.port,
+    dialect: dbConfig.dialect,
+    logging: env === 'development' ? console.log : false,
     pool: {
       max: 10,
       min: 0,
@@ -19,26 +24,25 @@ const sequelize = new Sequelize(
   }
 );
 
-// Models
+// Import models
 const User = require('./user')(sequelize);
 const App = require('./app')(sequelize);
 const ApiKey = require('./apiKey')(sequelize);
 
-// Associations
-User.hasMany(App);
-App.belongsTo(User);
+// Define associations
+User.hasMany(App, { foreignKey: 'userId' });
+App.belongsTo(User, { foreignKey: 'userId' });
 
-App.hasMany(ApiKey);
-ApiKey.belongsTo(App);
+App.hasMany(ApiKey, { foreignKey: 'appId' });
+ApiKey.belongsTo(App, { foreignKey: 'appId' });
 
-
+// Export the db object
 const db = {
   sequelize,
   Sequelize,
   User,
   App,
-  ApiKey,
-  
+  ApiKey
 };
 
-module.exports = db; 
+module.exports = db;
