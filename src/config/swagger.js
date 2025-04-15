@@ -98,68 +98,48 @@ const options = {
         },
         Event: {
           type: 'object',
+          required: ['type', 'name', 'timestamp'],
           properties: {
             id: {
               type: 'string',
               format: 'uuid'
             },
-            appId: {
-              type: 'string',
-              format: 'uuid'
-            },
             type: {
-              type: 'string'
+              type: 'string',
+              example: 'page_view'
             },
             name: {
-              type: 'string'
+              type: 'string',
+              example: 'Homepage View'
             },
             url: {
               type: 'string',
-              format: 'uri'
+              example: 'https://example.com/home'
             },
             referrer: {
               type: 'string',
-              format: 'uri'
+              example: 'https://google.com'
             },
             device: {
-              type: 'string'
+              type: 'string',
+              example: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1)'
             },
             ipAddress: {
               type: 'string',
-              format: 'ipv4'
+              example: '192.168.1.1'
             },
             userId: {
-              type: 'string'
-            },
-            sessionId: {
-              type: 'string'
-            },
-            page: {
-              type: 'string'
+              type: 'string',
+              example: 'user123'
             },
             metadata: {
               type: 'object',
-              properties: {
-                browser: {
-                  type: 'string'
-                },
-                os: {
-                  type: 'string'
-                },
-                screenSize: {
-                  type: 'string'
-                }
+              example: {
+                buttonColor: 'blue',
+                pageSection: 'header'
               }
             },
             timestamp: {
-              type: 'string',
-              format: 'date-time'
-            },
-            createdAt: {
-              type: 'string',
-              format: 'date-time'
-            },
-            updatedAt: {
               type: 'string',
               format: 'date-time'
             }
@@ -211,6 +191,9 @@ const options = {
               items: {
                 type: 'object',
                 properties: {
+                  field: {
+                    type: 'string'
+                  },
                   message: {
                     type: 'string'
                   }

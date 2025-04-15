@@ -1,22 +1,21 @@
 Event Analytics Platform
 
-A lightweight, high-performance analytics solution designed to help you easily track user interactions on your web applications without all the complex stuff you'll see with big industry players.
-
+A lightweight, high-performance analytics solution designed to help easily track user interactions on the web applications.
 What's this?
 
-This analytics platform helps you understand how users behave on your website or apps. It lets you track clicks, page views, and custom events quickly and easily, focusing on simplicity and privacy.
+This analytics platform helps us understand how users behave on the website or apps. It lets us track clicks, page views, and custom events quickly and easily, focusing on simplicity and privacy.
 
 Features
 
-Event Tracking: Easily capture clicks, page views, form submits, and your custom events.
+Event Tracking: Easily capture clicks, page views, form submits, and the custom events.
 
-User Journey Analysis: See how people actually move around your site or app.
+User Journey Analysis: See how people actually move around the site or app.
 
-Device & Browser Stats: Quickly check what devices and browsers your visitors prefer.
+Device & Browser Stats: Quickly check what devices and browsers the visitors prefer.
 
 Performance Metrics: Keep an eye on page load times and user interactions.
 
-API-first Design: Integrate this platform with any frontend tech you're using.
+API-first Design: Integrate this platform with any frontend tech we areusing.
 
 Privacy-focused: No cookies are required by default.
 
@@ -53,7 +52,7 @@ Launch the server by running npm run dev
 
 Use the API to start tracking events
 
-After these steps, check your dashboard at /dashboard to see your data in action!
+After these steps, check the dashboard at /dashboard to see the data in action!
 
 Architecture
 
@@ -63,7 +62,7 @@ Service-based Structure
 
 Controllers deal with requests and responses.
 
-Services hold your main business logic.
+Services hold our main business logic.
 
 Models define how data is structured.
 
@@ -107,15 +106,9 @@ Planned Enhancements
 
 Advanced Segmentation
 
-Let you filter analytics using custom user attributes.
+Let us filter analytics using custom user attributes.
 
 Create groups to analyze specific types of users.
-
-Easy integration with A/B testing.
-
-Machine Learning Insights
-
-Spot unusual activity with anomaly detection.
 
 Predict user behavior using advanced analytics.
 
@@ -123,7 +116,7 @@ Automatically generate useful insights.
 
 Data Export & Integration
 
-Export your data to CSV, JSON, and other formats.
+Export the data to CSV, JSON, and other formats.
 
 Integrate directly with data warehouses.
 
@@ -131,7 +124,7 @@ Webhook support for real-time notifications.
 
 Multi-Tenancy
 
-Organizational accounts to manage your team.
+Organizational accounts to manage a team.
 
 Role-based permissions for security.
 
