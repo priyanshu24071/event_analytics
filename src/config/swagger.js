@@ -51,7 +51,15 @@ const options = {
               type: 'string',
               format: 'email'
             },
+            password: {
+              type: 'string',
+              format: 'password'
+            },
             createdAt: {
+              type: 'string',
+              format: 'date-time'
+            },
+            updatedAt: {
               type: 'string',
               format: 'date-time'
             }
@@ -72,17 +80,88 @@ const options = {
             },
             type: {
               type: 'string',
-              enum: ['website', 'mobile']
+              enum: ['website', 'mobile', 'desktop']
+            },
+            userId: {
+              type: 'string',
+              format: 'uuid'
             },
             createdAt: {
               type: 'string',
               format: 'date-time'
             },
-            ApiKeys: {
-              type: 'array',
-              items: {
-                $ref: '#/components/schemas/ApiKey'
+            updatedAt: {
+              type: 'string',
+              format: 'date-time'
+            }
+          }
+        },
+        Event: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid'
+            },
+            appId: {
+              type: 'string',
+              format: 'uuid'
+            },
+            type: {
+              type: 'string'
+            },
+            name: {
+              type: 'string'
+            },
+            url: {
+              type: 'string',
+              format: 'uri'
+            },
+            referrer: {
+              type: 'string',
+              format: 'uri'
+            },
+            device: {
+              type: 'string'
+            },
+            ipAddress: {
+              type: 'string',
+              format: 'ipv4'
+            },
+            userId: {
+              type: 'string'
+            },
+            sessionId: {
+              type: 'string'
+            },
+            page: {
+              type: 'string'
+            },
+            metadata: {
+              type: 'object',
+              properties: {
+                browser: {
+                  type: 'string'
+                },
+                os: {
+                  type: 'string'
+                },
+                screenSize: {
+                  type: 'string'
+                }
               }
+            },
+            timestamp: {
+              type: 'string',
+              format: 'date-time'
+            },
+            createdAt: {
+              type: 'string',
+              format: 'date-time'
+            },
+            updatedAt: {
+              type: 'string',
+              format: 'date-time'
             }
           }
         },
@@ -96,55 +175,69 @@ const options = {
             key: {
               type: 'string'
             },
+            appId: {
+              type: 'string',
+              format: 'uuid'
+            },
             isActive: {
               type: 'boolean'
             },
             expiresAt: {
               type: 'string',
               format: 'date-time'
-            }
-          }
-        },
-        Event: {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string',
-              format: 'uuid'
             },
-            type: {
-              type: 'string'
-            },
-            name: {
-              type: 'string'
-            },
-            data: {
-              type: 'object'
-            },
-            timestamp: {
+            createdAt: {
               type: 'string',
               format: 'date-time'
             },
-            userId: {
+            updatedAt: {
+              type: 'string',
+              format: 'date-time'
+            }
+          }
+        },
+        Error: {
+          type: 'object',
+          properties: {
+            success: {
+              type: 'boolean',
+              example: false
+            },
+            message: {
               type: 'string'
             },
-            sessionId: {
-              type: 'string'
-            },
-            page: {
-              type: 'string'
+            errors: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  message: {
+                    type: 'string'
+                  }
+                }
+              }
             }
           }
         }
-      }
+      },
+      security: [
+        {
+          bearerAuth: []
+        }
+      ]
     }
   },
-  apis: ['./src/api/controllers/*.js', './src/api/routes/*.js']
+  apis: ['./src/api/routes/*.js', './src/api/controllers/*.js']
 };
 
 const specs = swaggerJsdoc(options);
 
 module.exports = {
   serve: swaggerUi.serve,
-  setup: swaggerUi.setup(specs)
+  setup: swaggerUi.setup(specs, {
+    explorer: true,
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: 'Event Analytics API Documentation'
+  })
 }; 
+ 

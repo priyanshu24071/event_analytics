@@ -494,7 +494,7 @@ console.log("All events:", allUserEvents.map(e => ({
     // Get most recent event to extract device details
     const mostRecentEvent = await Event.findOne({
       where: { userId },
-      order: [['timestamp', 'DESC']]
+      order: [['createdAt', 'DESC']]
     });
     console.log("Most recent event:", mostRecentEvent);
     
