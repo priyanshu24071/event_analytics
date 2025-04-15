@@ -30,7 +30,6 @@ const validateCollectEvent = (req, res, next) => {
 };
 
 const validateEventSummary = (req, res, next) => {
-  console.log("Query parameters received:", req.query);
   
   const schema = Joi.object({
     event: Joi.string().required(),

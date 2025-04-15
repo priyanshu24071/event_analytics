@@ -489,7 +489,6 @@ console.log("All events:", allUserEvents.map(e => ({
       where: { userId },
       order: [['createdAt', 'DESC']]
     });
-    console.log("Most recent event:", mostRecentEvent);
     
     // Extract device details and IP from metadata
     const deviceDetails = {
