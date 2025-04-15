@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
 const config = require('../../config/config');
+const event = require('./event');
 
 // Determine the environment and get the corresponding configuration
 const env = process.env.NODE_ENV || 'development';

@@ -32,7 +32,7 @@ const register = async (req, res, next) => {
       }
     });
   } catch (error) {
-    console.error('Error registering app:', error);
+    logger.error('Error registering app:', error);
     next(error);
   }
 };
@@ -84,7 +84,7 @@ const getApiKey = async (req, res, next) => {
       }
     });
   } catch (error) {
-    console.error('Error getting API key:', error);
+    logger.error('Error getting API key:', error);
     next(error);
   }
 };
@@ -126,7 +126,7 @@ const revokeApiKey = async (req, res, next) => {
       message: 'API key(s) revoked successfully'
     });
   } catch (error) {
-    console.error('Error revoking API key:', error);
+    logger.error('Error revoking API key:', error);
     next(error);
   }
 };
@@ -177,7 +177,7 @@ const regenerateApiKey = async (req, res, next) => {
       }
     });
   } catch (error) {
-    console.error('Error regenerating API key:', error);
+    logger.error('Error regenerating API key:', error);
     next(error);
   }
 };

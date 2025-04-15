@@ -5,9 +5,12 @@ const morgan = require('morgan');
 const passport = require('passport');
 const config = require('./config/config');
 const db = require('./db/models');
+const logger = require('./utils/logger');
 const routes = require('./api/routes');
-// const { errorHandler } = require('./api/middlewares/errorHandler');
+const { errorHandler } = require('./api/middlewares/errorHandler');
 const { setupGoogleStrategy } = require('./config/passport');
+const swaggerConfig = require('./config/swagger');
+require('dotenv').config();
 
 // Initialize app
 const app = express();
@@ -26,13 +29,16 @@ setupGoogleStrategy();
 // API routes
 app.use('/api', routes);
 
-// Add a test route to verify the server is running
+// Swagger docs
+app.use('/api-docs', swaggerConfig.serve, swaggerConfig.setup);
+
+// Root route
 app.get('/', (req, res) => {
-  res.json({ message: 'Server is running' });
+  res.json({ message: 'Welcome to Event Analytics API' });
 });
 
-// // Error handler
-// app.use(errorHandler);
+// Error handler
+app.use(errorHandler);
 
 // Start server
 const PORT = config.port || 3001;
@@ -41,10 +47,11 @@ db.sequelize.sync({ alter: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
+      console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
     });
   })
   .catch(err => {
-    console.error('Unable to connect to the database:', err);
+    logger.error('Unable to connect to the database:', err);
   });
 
 module.exports = app; 

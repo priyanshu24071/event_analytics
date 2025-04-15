@@ -7,13 +7,21 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    eventType: {
+    appId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    name: {
       type: DataTypes.STRING,
       allowNull: false
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     referrer: {
       type: DataTypes.STRING,
@@ -21,13 +29,21 @@ module.exports = (sequelize) => {
     },
     device: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     ipAddress: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     userId: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    sessionId: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    page: {
       type: DataTypes.STRING,
       allowNull: true
     },
