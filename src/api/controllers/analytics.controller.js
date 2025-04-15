@@ -256,9 +256,6 @@ const collectEvent = async (req, res, next) => {
       const userId = req.body.userId || null;
       const appId = req.app.id;
       
-      console.log('Collecting event with data:', {
-        event, device, userId, ipAddress, metadata  
-      });
       
       // Create event record
       const newEvent = await Event.create({
@@ -273,9 +270,6 @@ const collectEvent = async (req, res, next) => {
         metadata: metadata ? (typeof metadata === 'string' ? metadata : JSON.stringify(metadata)) : null,
         timestamp: new Date(timestamp)
       });
-      
-      console.log('Created event with metadata:', newEvent.metadata);
-      console.log('Created event with ipAddress:', newEvent.ipAddress);
       
       return res.status(201).json({
         success: true,
@@ -331,7 +325,6 @@ const collectEvent = async (req, res, next) => {
  */
 const getEventSummary = async (req, res, next) => {
   try {
-    console.log("Query parameters received:", req.query);
     const { event, startDate, endDate, app_id } = req.query;
     const userId = req.user.id;
     
@@ -466,7 +459,7 @@ const getEventSummary = async (req, res, next) => {
 const getUserStats = async (req, res, next) => {
   try {
     const { userId } = req.query;
-    console.log("Checking all events for user:", userId);
+    
 const allUserEvents = await Event.findAll({
   where: { userId },
   order: [['createdAt', 'DESC']]
