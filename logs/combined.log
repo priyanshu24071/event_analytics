@@ -1340,3 +1340,5 @@
 {"level":"info","message":"Redis connected successfully","service":"analytics-engine","timestamp":"2025-04-16 01:45:15"}
 {"level":"info","message":"Redis connected successfully","service":"analytics-engine","timestamp":"2025-04-16 01:45:15"}
 {"level":"info","message":"Redis connected successfully","service":"analytics-engine","timestamp":"2025-04-16 01:45:30"}
+{"level":"warn","message":"Rate limiting skipped - Redis not available","service":"analytics-engine","timestamp":"2025-04-16 01:49:43"}
+{"level":"warn","message":"Rate limiting skipped - Redis not available","service":"analytics-engine","timestamp":"2025-04-16 01:50:15"}
